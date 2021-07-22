@@ -31,6 +31,14 @@ function search(cosa: string, totalLength: number, bggl: string[][]): boolean {
 	var ritorno = false
 	for (var i = 0; i < bggl.length; i++) {
 		for (var j = 0; j < bggl[i].length; j++) {
+			// console.log("ul ", 		bggl?.[i-1]?.[j-1])
+			// console.log("u ", 		bggl?.[i-1]?.[j])
+			// console.log("ur ", 		bggl?.[i+1]?.[j+1])
+			// console.log("r ", 		bggl?.[i]?.[j+1])
+			// console.log("dr ", 		bggl?.[i+1]?.[j+1])
+			// console.log("d ", 		bggl?.[i+1]?.[j])
+			// console.log("dl ", 		bggl?.[i+1]?.[j-1])
+			// console.log("l ", 		bggl?.[i]?.[j-1])
 
 			var nuova = cosa.substr(1)
 			if (cosa.charAt(0) == bggl[i][j]) {
@@ -45,23 +53,15 @@ function search(cosa: string, totalLength: number, bggl: string[][]): boolean {
 					
 					// console.log("i ", i, " j ", j, " partenza marker ", marker, " invoco con ", nuova, " imposto la cella a ", marker)
 					myClonedArray[i][j] = smarker
-					// console.log("ul ", 		i>0 && j>0 ? bggl[i-1][j-1]:"-")
-					// console.log("u ", 		i>0 ? bggl[i-1][j]:"-")
-					// console.log("ur ", 		bggl[i+1][j+1])
-					// console.log("r ", 		bggl[i][j+1])
-					// console.log("dr ", 		bggl[i+1][j+1])
-					// console.log("d ", 		bggl[i+1][j])
-					// console.log("dl ", 		j>0 ? bggl[i+1][j-1]:"-")
-					// console.log("l ", 		j>0 ? bggl[i][j-1]:"-")
 
-					var enroute = 	i>0 && j>0 && bggl[i-1][j-1] == spreviousmrkr ||
-									i>0 && bggl[i-1][j] == spreviousmrkr ||
-									bggl[i+1][j+1] == spreviousmrkr ||
-									bggl[i][j+1] == spreviousmrkr ||
-									bggl[i+1][j+1] == spreviousmrkr ||
-									bggl[i+1][j] == spreviousmrkr ||
-									j>0 && bggl[i+1][j-1] == spreviousmrkr ||
-									j>0 && bggl[i][j-1] == spreviousmrkr
+					var enroute = 	bggl?.[i-1]?.[j-1] == spreviousmrkr ||
+									bggl?.[i-1]?.[j] == spreviousmrkr ||
+									bggl?.[i+1]?.[j+1] == spreviousmrkr ||
+									bggl?.[i]?.[j+1] == spreviousmrkr ||
+									bggl?.[i+1]?.[j+1] == spreviousmrkr ||
+									bggl?.[i+1]?.[j] == spreviousmrkr ||
+									bggl?.[i+1]?.[j-1] == spreviousmrkr ||
+									bggl?.[i]?.[j-1] == spreviousmrkr
 
 					ritorno = (enroute || marker == totalLength) && search(nuova, totalLength, myClonedArray)	
 				}

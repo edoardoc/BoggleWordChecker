@@ -25,11 +25,20 @@ function logg(bggl) {
     }
 }
 function search(cosa, totalLength, bggl) {
+    var _a, _b, _c, _d, _e, _f, _g, _h;
     console.log(cosa);
     // logg(bggl)
     var ritorno = false;
     for (var i = 0; i < bggl.length; i++) {
         for (var j = 0; j < bggl[i].length; j++) {
+            // console.log("ul ", 		bggl?.[i-1]?.[j-1])
+            // console.log("u ", 		bggl?.[i-1]?.[j])
+            // console.log("ur ", 		bggl?.[i+1]?.[j+1])
+            // console.log("r ", 		bggl?.[i]?.[j+1])
+            // console.log("dr ", 		bggl?.[i+1]?.[j+1])
+            // console.log("d ", 		bggl?.[i+1]?.[j])
+            // console.log("dl ", 		bggl?.[i+1]?.[j-1])
+            // console.log("l ", 		bggl?.[i]?.[j-1])
             var nuova = cosa.substr(1);
             if (cosa.charAt(0) == bggl[i][j]) {
                 // console.log("trovato ", cosa.charAt(0))
@@ -43,22 +52,14 @@ function search(cosa, totalLength, bggl) {
                     var spreviousmrkr = String(marker + 1);
                     // console.log("i ", i, " j ", j, " partenza marker ", marker, " invoco con ", nuova, " imposto la cella a ", marker)
                     myClonedArray[i][j] = smarker;
-                    // console.log("ul ", 		i>0 && j>0 ? bggl[i-1][j-1]:"-")
-                    // console.log("u ", 		i>0 ? bggl[i-1][j]:"-")
-                    // console.log("ur ", 		bggl[i+1][j+1])
-                    // console.log("r ", 		bggl[i][j+1])
-                    // console.log("dr ", 		bggl[i+1][j+1])
-                    // console.log("d ", 		bggl[i+1][j])
-                    // console.log("dl ", 		j>0 ? bggl[i+1][j-1]:"-")
-                    // console.log("l ", 		j>0 ? bggl[i][j-1]:"-")
-                    var enroute = i > 0 && j > 0 && bggl[i - 1][j - 1] == spreviousmrkr ||
-                        i > 0 && bggl[i - 1][j] == spreviousmrkr ||
-                        bggl[i + 1][j + 1] == spreviousmrkr ||
-                        bggl[i][j + 1] == spreviousmrkr ||
-                        bggl[i + 1][j + 1] == spreviousmrkr ||
-                        bggl[i + 1][j] == spreviousmrkr ||
-                        j > 0 && bggl[i + 1][j - 1] == spreviousmrkr ||
-                        j > 0 && bggl[i][j - 1] == spreviousmrkr;
+                    var enroute = ((_a = bggl === null || bggl === void 0 ? void 0 : bggl[i - 1]) === null || _a === void 0 ? void 0 : _a[j - 1]) == spreviousmrkr ||
+                        ((_b = bggl === null || bggl === void 0 ? void 0 : bggl[i - 1]) === null || _b === void 0 ? void 0 : _b[j]) == spreviousmrkr ||
+                        ((_c = bggl === null || bggl === void 0 ? void 0 : bggl[i + 1]) === null || _c === void 0 ? void 0 : _c[j + 1]) == spreviousmrkr ||
+                        ((_d = bggl === null || bggl === void 0 ? void 0 : bggl[i]) === null || _d === void 0 ? void 0 : _d[j + 1]) == spreviousmrkr ||
+                        ((_e = bggl === null || bggl === void 0 ? void 0 : bggl[i + 1]) === null || _e === void 0 ? void 0 : _e[j + 1]) == spreviousmrkr ||
+                        ((_f = bggl === null || bggl === void 0 ? void 0 : bggl[i + 1]) === null || _f === void 0 ? void 0 : _f[j]) == spreviousmrkr ||
+                        ((_g = bggl === null || bggl === void 0 ? void 0 : bggl[i + 1]) === null || _g === void 0 ? void 0 : _g[j - 1]) == spreviousmrkr ||
+                        ((_h = bggl === null || bggl === void 0 ? void 0 : bggl[i]) === null || _h === void 0 ? void 0 : _h[j - 1]) == spreviousmrkr;
                     ritorno = (enroute || marker == totalLength) && search(nuova, totalLength, myClonedArray);
                 }
             }
