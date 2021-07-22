@@ -24,9 +24,9 @@ function logg(bggl) {
         process.stdout.write("\n");
     }
 }
-function search(cosa, bggl) {
+function search(cosa, totalLength, bggl) {
     console.log(cosa);
-    logg(bggl);
+    // logg(bggl)
     var ritorno = false;
     for (var i = 0; i < bggl.length; i++) {
         for (var j = 0; j < bggl[i].length; j++) {
@@ -59,7 +59,7 @@ function search(cosa, bggl) {
                         bggl[i + 1][j] == spreviousmrkr ||
                         j > 0 && bggl[i + 1][j - 1] == spreviousmrkr ||
                         j > 0 && bggl[i][j - 1] == spreviousmrkr;
-                    ritorno = (enroute || marker == 5) && search(nuova, myClonedArray);
+                    ritorno = (enroute || marker == totalLength) && search(nuova, totalLength, myClonedArray);
                 }
             }
         }
@@ -68,6 +68,6 @@ function search(cosa, bggl) {
 }
 // logg(b)
 // logg(b2)
-console.log(search("BINGO", b));
-console.log(search("BINGOHJKKLJ", b));
-console.log(search("BINGOKJKUYO", b));
+console.log(search("BINGO", "BINGO".length, b));
+console.log(search("BITFGNGO", "BITFGNGO".length, b));
+console.log(search("RGHTFJK", "RGHTFJK".length, b));

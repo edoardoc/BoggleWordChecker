@@ -25,9 +25,9 @@ function logg(bggl: string[][]) {
 }
 
 
-function search(cosa: string, bggl: string[][]): boolean {
+function search(cosa: string, totalLength: number, bggl: string[][]): boolean {
 	console.log(cosa)
-	logg(bggl)
+	// logg(bggl)
 	var ritorno = false
 	for (var i = 0; i < bggl.length; i++) {
 		for (var j = 0; j < bggl[i].length; j++) {
@@ -63,7 +63,7 @@ function search(cosa: string, bggl: string[][]): boolean {
 									j>0 && bggl[i+1][j-1] == spreviousmrkr ||
 									j>0 && bggl[i][j-1] == spreviousmrkr
 
-					ritorno = (enroute || marker == 5) && search(nuova, myClonedArray)	
+					ritorno = (enroute || marker == totalLength) && search(nuova, totalLength, myClonedArray)	
 				}
 			}
 		}
@@ -76,6 +76,6 @@ function search(cosa: string, bggl: string[][]): boolean {
 
 // logg(b)
 // logg(b2)
-console.log(search("BINGO", b))
-console.log(search("BINGOHJKKLJ", b))
-console.log(search("BINGOKJKUYO", b))
+console.log(search("BINGO", "BINGO".length, b))
+console.log(search("BITFGNGO", "BITFGNGO".length, b))
+console.log(search("RGHTFJK", "RGHTFJK".length, b))
