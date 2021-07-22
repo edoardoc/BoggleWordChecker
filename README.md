@@ -18,3 +18,5 @@ For example, in the above board "BINGO", "LINGO", and "ILNBIA" would all be vali
 Your function should take two arguments (a 2D array and a string) and return true or false depending on whether the string is found in the array as per Boggle rules.
 
 The function should work with various array and string sizes (squared arrays up to 150x150 and strings up to 150 uppercase letters). You do not have to check whether the string is a real word or not, only if it's a valid guess. 
+
+...
