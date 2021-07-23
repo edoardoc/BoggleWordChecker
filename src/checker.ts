@@ -14,7 +14,7 @@ var b2 = [
 ];
 
 function logg(bggl: string[][]) {
-	console.log("righe ", bggl.length, " colonne ", bggl[0].length)
+	// console.log("righe ", bggl.length, " colonne ", bggl[0].length)
 	console.log("--------------------------")
 	for (let riga of bggl) {
 		for (let el of riga) {
@@ -26,45 +26,38 @@ function logg(bggl: string[][]) {
 
 
 function search(cosa: string, totalLength: number, bggl: string[][]): boolean {
-	console.log(cosa)
-	// logg(bggl)
 	var ritorno = false
 	for (var i = 0; i < bggl.length; i++) {
 		for (var j = 0; j < bggl[i].length; j++) {
-			// console.log("ul ", 		bggl?.[i-1]?.[j-1])
-			// console.log("u ", 		bggl?.[i-1]?.[j])
-			// console.log("ur ", 		bggl?.[i+1]?.[j+1])
-			// console.log("r ", 		bggl?.[i]?.[j+1])
-			// console.log("dr ", 		bggl?.[i+1]?.[j+1])
-			// console.log("d ", 		bggl?.[i+1]?.[j])
-			// console.log("dl ", 		bggl?.[i+1]?.[j-1])
-			// console.log("l ", 		bggl?.[i]?.[j-1])
-
 			var nuova = cosa.substr(1)
 			if (cosa.charAt(0) == bggl[i][j]) {
-				// console.log("trovato ", cosa.charAt(0))
+				console.log("-----> ", cosa.charAt(0))
+
+				var marker = cosa.length
+				var smarker = String(marker)
+				var spreviousmrkr = String(marker+1)
 				var myClonedArray = cloneDeep(bggl);
-				if (nuova.length == 0) {
-					ritorno = true;
-				} else {
-					var marker = cosa.length
-					var smarker = String(marker)
-					var spreviousmrkr = String(marker+1)
-					
-					// console.log("i ", i, " j ", j, " partenza marker ", marker, " invoco con ", nuova, " imposto la cella a ", marker)
-					myClonedArray[i][j] = smarker
 
-					var enroute = 	bggl?.[i-1]?.[j-1] == spreviousmrkr ||
-									bggl?.[i-1]?.[j] == spreviousmrkr ||
-									bggl?.[i+1]?.[j+1] == spreviousmrkr ||
-									bggl?.[i]?.[j+1] == spreviousmrkr ||
-									bggl?.[i+1]?.[j+1] == spreviousmrkr ||
-									bggl?.[i+1]?.[j] == spreviousmrkr ||
-									bggl?.[i+1]?.[j-1] == spreviousmrkr ||
-									bggl?.[i]?.[j-1] == spreviousmrkr
+				myClonedArray[i][j] = smarker
 
-					ritorno = (enroute || marker == totalLength) && search(nuova, totalLength, myClonedArray)	
-				}
+				var enroute = 	bggl?.[i-1]?.[j-1] == spreviousmrkr ||
+								bggl?.[i-1]?.[j] == spreviousmrkr ||
+								bggl?.[i+1]?.[j+1] == spreviousmrkr ||
+								bggl?.[i]?.[j+1] == spreviousmrkr ||
+								bggl?.[i+1]?.[j+1] == spreviousmrkr ||
+								bggl?.[i+1]?.[j] == spreviousmrkr ||
+								bggl?.[i+1]?.[j-1] == spreviousmrkr ||
+								bggl?.[i]?.[j-1] == spreviousmrkr
+								
+				enroute = (enroute || marker == totalLength)
+
+				console.log("enroute ", enroute, " partenza marker ", marker, " invoco con ", nuova)
+				logg(myClonedArray)
+				ritorno = ritorno || (enroute && search(nuova, totalLength, myClonedArray))	
+				if (marker == 1 && enroute) {
+					console.log("ritorno = true perche nuova e' vuota ")
+					return true;
+				} 
 			}
 		}
 
@@ -72,10 +65,19 @@ function search(cosa: string, totalLength: number, bggl: string[][]): boolean {
 	return ritorno
 }
 
-
-
 // logg(b)
 // logg(b2)
-console.log(search("BINGO", "BINGO".length, b))
-console.log(search("BITFGNGO", "BITFGNGO".length, b))
-console.log(search("RGHTFJK", "RGHTFJK".length, b))
+// console.log(search("BINGO", "BINGO".length, b))
+// console.log(search("BITFGNGO", "BITFGNGO".length, b))
+// console.log(search("RGHTFJK", "RGHTFJK".length, b))
+// var third = "BINGOEAU"
+// console.log(search(third, third.length, b))
+
+// var third = "EAL" // true
+// var third = "EAKBINGO" // false
+var third = "BINGO" // true
+// var third = "BINGOEWAL" // true
+// var third = "GEOLARUNL" // true
+// var third = "GIEOLARUNL" // false
+
+console.log(search(third, third.length, b))
