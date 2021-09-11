@@ -1,5 +1,5 @@
 # BoggleWordChecker
-my first atempt to the boggle
+my first atempt at the boggle
 
 
 Write a function that determines whether a string is a valid guess in a Boggle board, as per the rules of Boggle. A Boggle board is a 2D array of individual characters, e.g.:
